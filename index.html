@@ -20,13 +20,14 @@ main{max-width:1200px;margin:auto;padding:0 20px 60px}
 .top{counter-reset:t;padding:0;list-style:none;display:grid;gap:8px}
 .top li{counter-increment:t;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:8px 12px;display:flex;gap:12px;align-items:center}
 .top li:before{content:counter(t);font-weight:800;color:var(--accent);min-width:1.4em;text-align:right}
-.top img{width:52px;height:52px;object-fit:contain;background:#fff;border-radius:8px}
+.top img{width:52px;height:52px;flex:none;object-fit:contain;background:#fff;border-radius:8px}
 .top .p{margin-left:auto;font-weight:700;color:var(--good);white-space:nowrap}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
 .card .ph{position:relative;background:#fff;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--line)}
-.card .ph img{max-width:100%;max-height:100%;object-fit:contain}
-.pct{position:absolute;top:10px;left:10px;background:var(--good);color:#fff;font-weight:800;padding:3px 10px;border-radius:999px;font-size:14px}
+.card .ph{overflow:hidden}
+.card .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:6px}
+.pct{position:absolute;z-index:1;top:10px;left:10px;background:var(--good);color:#fff;font-weight:800;padding:3px 10px;border-radius:999px;font-size:14px}
 .pct.na{background:#888}
 .body{padding:12px 14px 14px;display:flex;flex-direction:column;gap:6px;flex:1}
 .name{font-weight:700;line-height:1.3}
@@ -44,6 +45,33 @@ a{color:#0b57d0}
 .notes li{margin:4px 0;max-width:900px}
 footer{color:var(--mut);font-size:12px;max-width:1200px;margin:auto;padding:0 20px 40px}
 [data-l]{display:none} body.en [data-l=en], body.zh [data-l=zh]{display:revert}
+img{max-width:100%}
+@media (max-width:640px){
+  body{font-size:14px}
+  header{padding:16px 12px 4px} main{padding:0 12px 40px} footer{padding:0 12px 30px}
+  h1{font-size:19px;line-height:1.3} h2{font-size:16px;margin:20px 0 8px}
+  .bar{gap:6px;margin-top:10px}
+  .bar button,.bar select{padding:5px 10px;font-size:13px}
+  .top li{padding:6px 8px;gap:8px}
+  .top img{width:44px;height:44px}
+  .top small{font-size:11.5px}
+  .grid{grid-template-columns:1fr;gap:10px}
+  .card{display:grid;grid-template-columns:96px 1fr;column-gap:10px;row-gap:5px;padding:10px;align-items:start}
+  .card .ph{grid-column:1;grid-row:1/span 3;width:96px;height:96px;aspect-ratio:auto;border:1px solid var(--line);border-radius:10px}
+  .card .ph img{padding:3px}
+  .pct{top:4px;left:4px;font-size:11px;padding:1px 6px}
+  .body{display:contents}
+  .body>.line,.body>.name,.body>.jp{grid-column:2}
+  .body>*:not(.line):not(.name):not(.jp){grid-column:1/-1}
+  .name{font-size:14px}
+  .jp,.line{font-size:11px}
+  .prices{gap:5px}
+  .box{padding:5px 6px}
+  .box b{font-size:15.5px}
+  .box small{font-size:11px}
+  .meta,.flag{font-size:11.5px}
+  .btn{padding:7px;font-size:13px;margin-top:4px}
+}
 </style>
 </head>
 <body class="zh">
