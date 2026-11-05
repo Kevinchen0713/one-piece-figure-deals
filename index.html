@@ -54,15 +54,15 @@ footer{color:var(--mut);font-size:12px;max-width:1200px;margin:auto;padding:0 20
     <span data-l="en">Prices checked Nov 5, 2026. Rate: $1 = ¥158.38. 59 figures, all new or sealed, all able to reach a Tokyo hotel before Nov 10. Ones she already owns (Grandista Luffy Gear 5 III, Theorama Soul Zoro) and ones that can't arrive in time were removed. Prices include shipping. Only items at least 20% cheaper than the US are listed.
   </p>
   <div class="bar" id="series">
-    <button class="on" data-s="all" onclick="ser(this)"><span data-l="zh">全部</span><span data-l="en">All</span></button>
-    <button data-s="One Piece" onclick="ser(this)"><span data-l="zh">海贼王</span><span data-l="en">One Piece</span></button>
-    <button data-s="Demon Slayer" onclick="ser(this)"><span data-l="zh">鬼灭之刃</span><span data-l="en">Demon Slayer</span></button>
-    <button data-s="Spy×Family" onclick="ser(this)"><span data-l="zh">间谍过家家</span><span data-l="en">Spy×Family</span></button>
-    <button data-s="Gundam" onclick="ser(this)"><span data-l="zh">高达</span><span data-l="en">Gundam</span></button>
+    <button class="on" data-s="all" onclick="setSeries(this)"><span data-l="zh">全部</span><span data-l="en">All</span></button>
+    <button data-s="One Piece" onclick="setSeries(this)"><span data-l="zh">海贼王</span><span data-l="en">One Piece</span></button>
+    <button data-s="Demon Slayer" onclick="setSeries(this)"><span data-l="zh">鬼灭之刃</span><span data-l="en">Demon Slayer</span></button>
+    <button data-s="Spy×Family" onclick="setSeries(this)"><span data-l="zh">间谍过家家</span><span data-l="en">Spy×Family</span></button>
+    <button data-s="Gundam" onclick="setSeries(this)"><span data-l="zh">高达</span><span data-l="en">Gundam</span></button>
   </div>
   <div class="bar">
-    <button id="bzh" class="on" onclick="lang('zh')">中文</button>
-    <button id="ben" onclick="lang('en')">English</button>
+    <button id="bzh" class="on" onclick="setLang('zh')">中文</button>
+    <button id="ben" onclick="setLang('en')">English</button>
     <select id="sort" onchange="render()">
       <option value="pct" data-zh="按省钱比例排序" data-en="Sort: biggest savings">按省钱比例排序</option>
       <option value="yen" data-zh="按日本价格排序（低→高）" data-en="Sort: Japan price (low → high)">按日本价格排序（低→高）</option>
@@ -125,8 +125,8 @@ function render(){
   const top = ITEMS.filter(i=>i.pct!=null&&(S==='all'||i.series===S)).sort((a,b)=>b.pct-a.pct||a.landed-b.landed).slice(0,10);
   document.getElementById('top').innerHTML = top.map(i=>`<li><img referrerpolicy="no-referrer" src="${esc(i.img)}" alt=""><div><b>${esc(L==='zh'?i.zh:i.en)}</b><br><small>${yen(i.landed)} (${usd(i.usd)}) vs ${usd(i.us)} · <a href="${esc(i.url)}" target="_blank" rel="noopener">${esc(L==='zh'?i.src_zh:i.src)}</a></small></div><span class="p">${T[L].save} ${i.pct}%</span></li>`).join('');
 }
-function ser(b){ S=b.dataset.s; for(const x of document.querySelectorAll('#series button')) x.classList.toggle('on', x===b); render(); }
-function lang(l){
+function setSeries(b){ S=b.dataset.s; for(const x of document.querySelectorAll('#series button')) x.classList.toggle('on', x===b); render(); }
+function setLang(l){
   L = l; document.body.className = l; document.documentElement.lang = l==='zh'?'zh-CN':'en';
   document.getElementById('bzh').classList.toggle('on', l==='zh'); document.getElementById('ben').classList.toggle('on', l==='en');
   for (const o of document.querySelectorAll('#sort option')) o.textContent = o.dataset[l];
